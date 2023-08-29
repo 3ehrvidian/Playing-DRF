@@ -7,3 +7,8 @@ class Drink(models.Model):
     def __str__(self):
         return self.name + ', ' + self.desc
     
+class Food(models.Model):
+    # id = models.IntegerField(primary_key=True)
+    food_name = models.CharField(max_length=100)
+    food_desc = models.CharField(max_length=100)
+    

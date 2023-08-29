@@ -18,11 +18,19 @@ from django.contrib import admin
 from django.urls import path
 from drinks import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
+from django.urls import include
+from . import views
+
+router = routers.DefaultRouter()
+router.register('food', views.FoodViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('drinks/', views.drink_list),
-    path('drinks/<int:id>', views.drink_detail)
+    path('drinks/<int:id>', views.drink_detail),
+    path('api/', include(router.urls)),
+    path('', views.home, name='home')
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+# urlpatterns = format_suffix_patterns(urlpatterns)

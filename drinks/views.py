@@ -1,9 +1,10 @@
 from django.http import JsonResponse
-from .models import Drink
-from .serializers import DrinkSerializer
+from .models import *
+from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
+from django.shortcuts import render
 
 
 @api_view(['GET', 'POST'])
@@ -42,3 +43,11 @@ def drink_detail(request, id, format=None):
     elif request.method == 'DELETE':
         drink.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class FoodViewSet(viewsets.ModelViewSet):
+    queryset = Food.objects.all()
+    serializer_class = FoodSerializer
+
+def home(request):
+    return render(request, 'main.html', {})
